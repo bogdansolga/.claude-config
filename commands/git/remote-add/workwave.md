@@ -1,6 +1,10 @@
 # Add Git Remote with WorkWave SSH Key
 
-Add a remote origin and configure the repo to use the workwave SSH key (~/.ssh/workwave).
+Add a remote origin and configure the repo to use the workwave SSH key (`~/.ssh/workwave`).
+
+## Arguments
+
+- `$ARGUMENTS` - Remote URL (e.g., `git@github.com:user/repo.git`)
 
 ## Execution Steps
 

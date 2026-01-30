@@ -1,6 +1,6 @@
 # Git Pull with WorkWave SSH Key
 
-Pull from remote using the workwave SSH key (~/.ssh/workwave).
+Pull from remote using the workwave SSH key (`~/.ssh/workwave`).
 
 ## Execution Steps
 

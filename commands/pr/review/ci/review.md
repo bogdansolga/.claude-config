@@ -1,11 +1,11 @@
 ---
-command: pr:review
-description: Request Claude GitHub Action review on PR and summarize results
+command: pr:review:ci
+description: Request Claude GitHub Action review on PR and summarize results (for CI pipelines)
 ---
 
-# Review PR with Claude
+# Review PR with Claude (CI Pipeline)
 
-Requests a comprehensive PR review from Claude via GitHub Actions and summarizes the results.
+Requests a comprehensive PR review from Claude via GitHub Actions and summarizes the results. Designed for use in CI pipelines.
 
 ## Arguments
 
@@ -56,8 +56,8 @@ Requests a comprehensive PR review from Claude via GitHub Actions and summarizes
 
 ```bash
 # Review current branch's PR
-/review-pr
+/pr:review:ci
 
 # Review specific PR
-/review-pr 42
+/pr:review:ci 42
 ```

@@ -1,6 +1,10 @@
 # Add Git Remote with Nix SSH Key
 
-Add a remote origin and configure the repo to use the nix SSH key (~/.ssh/nix).
+Add a remote origin and configure the repo to use the nix SSH key (`~/.ssh/nix`).
+
+## Arguments
+
+- `$ARGUMENTS` - Remote URL (e.g., `git@github.com:user/repo.git`)
 
 ## Execution Steps
 

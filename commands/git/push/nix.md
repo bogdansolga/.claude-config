@@ -1,6 +1,6 @@
 # Git Push with Nix SSH Key
 
-Push to remote using the nix SSH key (~/.ssh/nix).
+Push to remote using the nix SSH key (`~/.ssh/nix`).
 
 ## Execution Steps
 

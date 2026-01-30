@@ -1,6 +1,6 @@
 # Git Pull with Nix SSH Key
 
-Pull from remote using the nix SSH key (~/.ssh/nix).
+Pull from remote using the nix SSH key (`~/.ssh/nix`).
 
 ## Execution Steps
 

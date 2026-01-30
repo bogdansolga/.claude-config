@@ -1,6 +1,6 @@
 # Git Push with WorkWave SSH Key
 
-Push to remote using the workwave SSH key (~/.ssh/workwave).
+Push to remote using the workwave SSH key (`~/.ssh/workwave`).
 
 ## Execution Steps
 
