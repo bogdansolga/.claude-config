@@ -1,12 +1,21 @@
 # Git Push with WorkWave SSH Key
 
-Push to remote using the workwave SSH key (`~/.ssh/workwave`).
+Push to remote using the workwave SSH key (via `github-workwave` host alias in `~/.ssh/config`).
+
+## Prerequisites
+
+Remote URL must use `github-workwave` host alias:
+```
+git@github-workwave:ORG/REPO.git
+```
+
+If not configured, use `/git:remote-add:workwave` first.
 
 ## Execution Steps
 
 1. **Run Push**
    ```bash
-   GIT_SSH_COMMAND="ssh -i ~/.ssh/workwave -o IdentitiesOnly=yes" git push "$@"
+   git push "$@"
    ```
 
 2. **Report Result**

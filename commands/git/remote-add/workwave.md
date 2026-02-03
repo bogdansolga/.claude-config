@@ -1,6 +1,6 @@
 # Add Git Remote with WorkWave SSH Key
 
-Add a remote origin and configure the repo to use the workwave SSH key (`~/.ssh/workwave`).
+Add a remote origin using the `github-workwave` host alias (configured in `~/.ssh/config` to use `~/.ssh/workwave` key).
 
 ## Arguments
 
@@ -8,14 +8,17 @@ Add a remote origin and configure the repo to use the workwave SSH key (`~/.ssh/
 
 ## Execution Steps
 
-1. **Add Remote**
+1. **Transform URL to Use Host Alias**
+   - Convert `git@github.com:ORG/REPO.git` → `git@github-workwave:ORG/REPO.git`
+
+2. **Add Remote**
    ```bash
-   git remote add origin <url>
+   git remote add origin git@github-workwave:ORG/REPO.git
    ```
 
-2. **Configure SSH Key for Repo**
+   If origin already exists, update it:
    ```bash
-   git config core.sshCommand "ssh -i ~/.ssh/workwave -o IdentitiesOnly=yes"
+   git remote set-url origin git@github-workwave:ORG/REPO.git
    ```
 
 3. **Verify**
@@ -25,4 +28,4 @@ Add a remote origin and configure the repo to use the workwave SSH key (`~/.ssh/
 
 4. **Report Result**
    - Show configured remotes
-   - Confirm SSH key is set for this repo
+   - Confirm URL uses `github-workwave` alias
