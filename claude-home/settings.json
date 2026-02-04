@@ -15,6 +15,14 @@
           {
             "type": "command",
             "command": "cmd=$(jq -r '.tool_input.command // \"\"') && if echo \"$cmd\" | grep -qiE 'DROP\\s+(DATABASE|ROLE)'; then echo '{\"hookSpecificOutput\":{\"hookEventName\":\"PreToolUse\",\"permissionDecision\":\"deny\",\"permissionDecisionReason\":\"DROP DATABASE/ROLE is not allowed. Use the setup script (scripts/db/setup-database.sh) which handles database recreation safely.\"}}'; fi"
+          },
+          {
+            "type": "command",
+            "command": "cmd=$(jq -r '.tool_input.command // \"\"') && if echo \"$cmd\" | grep -qiE '(psql|mysql|sqlite3|mongosh).*(-c|-e|--command)' && echo \"$cmd\" | grep -qiE '\\b(INSERT|UPDATE|DELETE|TRUNCATE|ALTER|CREATE)\\b'; then echo '{\"hookSpecificOutput\":{\"hookEventName\":\"PreToolUse\",\"permissionDecision\":\"deny\",\"permissionDecisionReason\":\"Direct SQL write statements are not allowed. Create a migration script or SQL file instead, then execute it manually or via a migration tool.\"}}'; fi"
+          },
+          {
+            "type": "command",
+            "command": "cmd=$(jq -r '.tool_input.command // \"\"') && if echo \"$cmd\" | grep -qiE '(psql|mysql|sqlite3).*<.*\\.sql|cat.*\\.sql.*\\|.*(psql|mysql|sqlite3)'; then echo '{\"hookSpecificOutput\":{\"hookEventName\":\"PreToolUse\",\"permissionDecision\":\"deny\",\"permissionDecisionReason\":\"Direct execution of SQL files is not allowed. Review the generated SQL script first, then execute it manually.\"}}'; fi"
           }
         ]
       },
