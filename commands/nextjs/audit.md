@@ -221,7 +221,8 @@ if [ -f "AGENTS.md" ] && [ -d ".next-docs" ]; then
   echo "  Docs version: $(head -1 .next-docs/*.md 2>/dev/null | head -1)"
 else
   echo "✗ AGENTS.md not configured"
-  echo "  Run: bunx @next/codemod@canary agents-md"
+  echo "  Quick setup: cp -r ~/.claude-config/next-docs ./.next-docs"
+  echo "  Or run: bunx @next/codemod@canary agents-md"
   echo "  Benefit: 100% AI accuracy on framework tasks"
 fi
 ```

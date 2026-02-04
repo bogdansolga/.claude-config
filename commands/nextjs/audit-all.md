@@ -141,6 +141,10 @@ Projects needing AGENTS.md setup:
 
 **Setup command:**
 ```bash
+# Quick setup from claude-config
+cd /path/to/project && cp -r ~/.claude-config/next-docs ./.next-docs
+
+# Or download fresh via codemod
 cd /path/to/project && bunx @next/codemod@canary agents-md
 ```
 

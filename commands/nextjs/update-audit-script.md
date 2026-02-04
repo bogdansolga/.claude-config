@@ -6,7 +6,7 @@ description: Update and refine the portable Next.js audit script based on new fi
 ## Description
 
 Updates the portable Next.js 16 audit script located at:
-`/Volumes/NVMe/Development/IdeaProjects/personal/learnmicroservices-clone/scripts/nextjs-audit.ts`
+`~/.claude-config/scripts/nextjs-audit.ts`
 
 This script is the canonical implementation for auditing Next.js projects across the personal directory.
 
@@ -21,7 +21,7 @@ This script is the canonical implementation for auditing Next.js projects across
 ## Script Location
 
 ```
-/Volumes/NVMe/Development/IdeaProjects/personal/learnmicroservices-clone/scripts/nextjs-audit.ts
+~/.claude-config/scripts/nextjs-audit.ts
 ```
 
 ## Current Capabilities
@@ -46,7 +46,7 @@ The script works across different project structures:
 ### 1. Read Current Script
 
 ```bash
-cat /Volumes/NVMe/Development/IdeaProjects/personal/learnmicroservices-clone/scripts/nextjs-audit.ts
+cat ~/.claude-config/scripts/nextjs-audit.ts
 ```
 
 ### 2. Understand the Request
@@ -68,23 +68,23 @@ Edit the script maintaining:
 ### 4. Test on Multiple Projects
 
 ```bash
-# Test on learnmicroservices-clone
-cd /Volumes/NVMe/Development/IdeaProjects/personal/learnmicroservices-clone
-bun run scripts/nextjs-audit.ts
-
-# Test on another project
+# Test on training-manager
 cd /Volumes/NVMe/Development/IdeaProjects/personal/training-manager
-bun run /Volumes/NVMe/Development/IdeaProjects/personal/learnmicroservices-clone/scripts/nextjs-audit.ts
+bun run ~/.claude-config/scripts/nextjs-audit.ts
 
 # Test on finances-manager (complex structure)
 cd /Volumes/NVMe/Development/IdeaProjects/personal/finances-manager
-bun run /Volumes/NVMe/Development/IdeaProjects/personal/learnmicroservices-clone/scripts/nextjs-audit.ts
+bun run ~/.claude-config/scripts/nextjs-audit.ts
+
+# Test on learnmicroservices-clone
+cd /Volumes/NVMe/Development/IdeaProjects/personal/learnmicroservices-clone
+bun run ~/.claude-config/scripts/nextjs-audit.ts
 ```
 
 ### 5. Commit Changes
 
 ```bash
-cd /Volumes/NVMe/Development/IdeaProjects/personal/learnmicroservices-clone
+cd ~/.claude-config
 git add scripts/nextjs-audit.ts
 git commit -m "Update nextjs-audit.ts: <description of changes>"
 ```

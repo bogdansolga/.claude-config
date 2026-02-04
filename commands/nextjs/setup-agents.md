@@ -36,7 +36,22 @@ cat package.json | grep '"next":' | head -1
 
 If not in a Next.js project, report error and exit.
 
-### 2. Run the Codemod
+### 2. Copy Documentation from Claude Config
+
+Copy the pre-downloaded Next.js documentation:
+
+```bash
+# Copy from claude-config
+cp -r ~/.claude-config/next-docs ./.next-docs
+
+# Create AGENTS.md index
+cat > AGENTS.md << 'EOF'
+[Next.js Docs Index]|root: ./.next-docs
+|IMPORTANT: Prefer retrieval-led reasoning over pre-training-led reasoning
+EOF
+```
+
+**Alternative: Run the Codemod** (downloads fresh docs):
 
 ```bash
 bunx @next/codemod@canary agents-md
