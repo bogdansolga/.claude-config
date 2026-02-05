@@ -1,1 +1,0 @@
-/Users/bogdan/.claude-config/scripts/status-line.sh
