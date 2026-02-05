@@ -49,7 +49,7 @@ done
 # Commands - create symlinks to this repo's commands
 echo ""
 echo "=== Setting up command symlinks ==="
-for cmd_dir in git pr quality workflow; do
+for cmd_dir in git pr quality workflow nextjs; do
     if [ -d "$SCRIPT_DIR/commands/$cmd_dir" ]; then
         # Remove existing (file, symlink, or directory)
         if [ -e ~/.claude/commands/$cmd_dir ] || [ -L ~/.claude/commands/$cmd_dir ]; then
@@ -84,8 +84,8 @@ echo "=== Syncing to ~/.claude-config ==="
 # Create ~/.claude-config if it doesn't exist
 mkdir -p ~/.claude-config
 
-# Sync commands, config, docs, scripts, skills
-for dir in commands config docs scripts skills; do
+# Sync commands, config, docs, scripts, skills, next-docs
+for dir in commands config docs scripts skills next-docs; do
     if [ -d "$SCRIPT_DIR/$dir" ]; then
         rsync -av $DRY_RUN --delete "$SCRIPT_DIR/$dir/" ~/.claude-config/$dir/
         print_sync "$dir/"
@@ -109,7 +109,7 @@ else
     echo ""
     echo "Synced:"
     echo "  ~/.claude/settings.json"
-    echo "  ~/.claude/commands/{git,pr,quality,workflow} (symlinks)"
+    echo "  ~/.claude/commands/{git,pr,quality,workflow,nextjs} (symlinks)"
     echo "  ~/.claude/skills (symlink)"
     echo "  ~/.claude/agents/"
     echo "  ~/.claude/scripts/"
