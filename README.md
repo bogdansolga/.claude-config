@@ -1,11 +1,11 @@
 # claude-config
 
-Central repository for Claude Code configuration - commands, scripts, guardrails, and settings.
+Central repository for Claude Code configuration - commands, skills, scripts, guardrails, and settings.
 
 ## Install
 
 ```bash
-git clone git@github.com:bogdan/claude-config.git ~/.claude-config
+git clone git@github.com:bogdansolga/claude-config.git ~/.claude-config
 ~/.claude-config/install.sh
 ```
 
@@ -18,7 +18,6 @@ git clone git@github.com:bogdan/claude-config.git ~/.claude-config
 - `/git:cleanup` - delete merged branches
 - `/git:pull:workwave` / `/git:pull:nix` - pull with specific SSH key
 - `/git:push:workwave` / `/git:push:nix` - push with specific SSH key
-- `/git:remote-add:workwave` / `/git:remote-add:nix` - add remote with specific SSH key
 
 **PR**
 - `/pr:checks` - lint, types, tests before PR
@@ -33,8 +32,19 @@ git clone git@github.com:bogdan/claude-config.git ~/.claude-config
 - `/quality:find-large-files` - find + split recommendations
 - `/quality:simplify` - review for unnecessary complexity
 
+**Next.js**
+- `/nextjs:audit` - audit a Next.js project for performance and best practices
+- `/nextjs:audit-all` - audit all Next.js projects in a directory
+- `/nextjs:cache-strategy` - analyze and improve caching strategy
+- `/nextjs:optimize` - apply Next.js optimizations (React Compiler, caching, Turbopack)
+- `/nextjs:setup-agents` - set up AGENTS.md with version-matched docs
+- `/nextjs:update-audit-script` - update the portable audit script
+
 **Workflow**
 - `/workflow:task-declarative` - define success criteria and let agent loop
+
+**Other**
+- `/marp-presentation` - create a Marp presentation
 
 ## Guardrails
 
@@ -78,7 +88,7 @@ git clone git@github.com:bogdan/claude-config.git ~/.claude-config
 
 ## Skills
 
-- `finances-manager.md` - Domain knowledge for finances-manager project
+- `nextjs-developer.md` - Next.js development best practices
 - `senior-typescript-developer.md` - TypeScript best practices
 
 ## Agents
@@ -87,10 +97,7 @@ git clone git@github.com:bogdan/claude-config.git ~/.claude-config
 
 ## Plugins
 
-Expects these installed via `/plugins`:
-- `superpowers@superpowers-marketplace`
-- `frontend-design@claude-plugins-official`
-- `ralph-loop@claude-plugins-official`
+Managed via `/plugins`. Configuration in `plugins/config.json`.
 
 ## Structure
 
@@ -101,25 +108,39 @@ claude-config/
 ├── sync-to-home.sh             # Sync changes to ~/.claude
 ├── biome.jsonc                 # Project linter config
 │
-├── claude-home/                # ~/.claude contents
+├── claude-home/                # ~/.claude config files
 │   ├── settings.json           # PreToolUse hooks, plugins, status line
 │   ├── settings.local.json     # Local overrides
 │   ├── config.json             # Model, theme, editor
-│   ├── hooks.json              # Additional hooks
-│   ├── agents/                 # Custom agents
-│   │   └── typescript-reviewer.md
-│   ├── commands/               # Symlinks to ../commands/
-│   ├── output-styles/          # Custom output styles
-│   │   └── direct-objective.md
-│   ├── plugins/                # Plugin cache and config
-│   └── scripts/                # Custom scripts
-│       └── status-line.sh
+│   └── hooks.json              # Additional hooks
 │
-├── commands/                   # Slash commands
+├── commands/                   # Slash commands (symlinked to ~/.claude/commands)
 │   ├── git/                    # catchup, commit, sync, cleanup, pull, push
 │   ├── pr/                     # checks, create, review, code-rabbit, merge
+│   ├── nextjs/                 # audit, optimize, cache-strategy, setup-agents
 │   ├── quality/                # quick-fix, find-large-files, simplify
-│   └── workflow/               # task-declarative
+│   ├── workflow/               # task-declarative
+│   └── marp-presentation.md
+│
+├── agents/                     # Custom agents
+│   └── typescript-reviewer.md
+│
+├── skills/                     # Custom skills
+│   ├── nextjs-developer.md
+│   └── senior-typescript-developer.md
+│
+├── output-styles/              # Custom output styles
+│   └── direct-objective.md
+│
+├── plugins/                    # Plugin cache and config
+│   └── config.json
+│
+├── scripts/                    # Standalone scripts
+│   ├── check-code-quality.sh   # Code quality guardrails
+│   ├── debug-status-input.sh
+│   ├── nextjs-audit.ts         # Portable Next.js audit script
+│   ├── status-line.sh
+│   └── toggle-global-commands.sh
 │
 ├── config/                     # Base configs (templates)
 │   ├── config.json
@@ -130,28 +151,7 @@ claude-config/
 ├── git-hooks/                  # Git hooks for projects
 │   └── pre-commit              # 6-check pre-commit hook
 │
-├── scripts/                    # Standalone scripts
-│   └── check-code-quality.sh   # Code quality guardrails
-│
-└── skills/                     # Custom skills
-    ├── finances-manager.md
-    └── senior-typescript-developer.md
-```
-
-## Usage in Projects
-
-Copy guardrails to a project:
-
-```bash
-# Copy biome config
-cp ~/.claude-config/biome.jsonc /path/to/project/
-
-# Copy git hooks
-cp ~/.claude-config/git-hooks/pre-commit /path/to/project/.git/hooks/
-cp ~/.claude-config/git-hooks/pre-commit /path/to/project/scripts/git-hooks/
-
-# Copy check scripts
-cp ~/.claude-config/scripts/check-code-quality.sh /path/to/project/scripts/
+└── next-docs/                  # Next.js reference documentation
 ```
 
 ## Sync to Home
@@ -167,10 +167,9 @@ After making changes in this repo, sync to home folders:
 ```
 
 This syncs:
-- `claude-home/*` → `~/.claude/` (settings, agents, scripts)
-- `commands/` → `~/.claude/commands/` (as symlinks)
-- `skills/` → `~/.claude/skills` (as symlink)
-- Everything → `~/.claude-config/` (for backwards compatibility)
+- `claude-home/*` → `~/.claude/` (settings files)
+- `commands/`, `scripts/`, `skills/`, `agents/`, `output-styles/`, `plugins/` → `~/.claude/` (as symlinks)
+- `commands/`, `scripts/`, `skills/`, `next-docs/` → `~/.claude-config/` (copies, for backwards compatibility)
 
 ## Update
 
@@ -183,8 +182,6 @@ Commands auto-update (symlinked). Configs don't (your customizations preserved).
 ## Uninstall
 
 ```bash
-rm ~/.claude/commands/{git,pr,quality,workflow}
-rm ~/.claude/scripts/status-line.sh
-rm ~/.claude/skills
+rm ~/.claude/commands ~/.claude/scripts ~/.claude/skills ~/.claude/agents ~/.claude/output-styles ~/.claude/plugins
 # Restore backup if needed: mv ~/.claude/commands.bak.* ~/.claude/commands
 ```
